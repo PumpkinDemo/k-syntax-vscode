@@ -3,6 +3,13 @@
     "displayName": "k-syntax",
     "description": "k syntax demo",
     "version": "0.0.1",
+    "icon": "k-logo.png",
+    "author": {
+        "name": "Pumpk1n"
+    },
+    "repository": {
+        "url": "https://github.com/PumpkinDemo/k-syntax-vscode"
+    },
     "engines": {
         "vscode": "^1.71.0"
     },
