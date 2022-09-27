@@ -1,0 +1,29 @@
+{
+    "name": "k-syntax",
+    "displayName": "k-syntax",
+    "description": "k syntax demo",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.71.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "kframework",
+                "aliases": ["k", "kframework"],
+                "extensions": [".k"],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "kframework",
+                "scopeName": "source.k",
+                "path": "./syntaxes/kframework.tmLanguage.json"
+            }
+        ]
+    }
+}

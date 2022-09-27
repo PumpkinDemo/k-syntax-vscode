@@ -1,0 +1,114 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "kframework",
+    "patterns": [
+        { "include": "#module" },
+        { "include": "#requireSource" },
+        { "include": "#string" }
+    ],
+    "repository": {
+        "requireSource": {
+            "name": "keyword.control.requires.k",
+            "match": "\\b(requires)\\b"
+        },
+        "keyword": {
+            "patterns": [
+                {
+                    "name": "keyword.control.k",
+                    "match": "\\b(requires|imports)\\b"
+                },
+                {
+                    "name": "keyword.stmt.k",
+                    "match": "\\b(rule|syntax|configuration|context)\\b"
+                },
+                {
+                    "name": "entity.name.type.k",
+                    "match": "\\b(Id|Int|Bool|String|Token|Lexer|Float|Kresult)\\b"
+                },
+                {
+                    "name": "string.regexp.k",
+                    "match": "\\b(anywhere|function|strict|avoid|prefer|bracket|non-assoc|seqstrict|left|right|macro|token|notInRules|autoReject|structural|latex|binder)\\b"
+                },
+                {
+                    "name": "support.type.property-name.k",
+                    "match": "HOLE"
+                }
+            ]
+        },
+        
+        "string": {
+            "name": "string.quoted.double.k",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.k",
+                    "match": "\\\\."
+                }
+            ]
+        },
+
+        "tag":{
+            "begin": "(<)\\s*([\\w\\d\\-\\_]+)\\s*(>)",
+            "beginCaptures": {
+                "1": { "name": "punctuation.definition.tag.k" },
+                "2": { "name": "entity.name.tag.k" },
+                "3": { "name": "punctuation.definition.tag.k" }
+            },
+            "end": "(<)\\/\\s*(\\2)\\s*(>)",
+            "endCaptures": {
+                "1": { "name": "punctuation.definition.tag.k" },
+                "2": { "name": "entity.name.tag.k" },
+                "3": { "name": "punctuation.definition.tag.k" }
+            },
+            "patterns": [
+                { "include": "#tag" },
+                { "include": "#constant" }
+            ]
+        },
+
+        "constant":{
+            "patterns": [
+                {
+                    "name": "constant.numeric.k",
+                    "match": "(-|\\.)?\\b[0-9]+(\\.[0-9]+)?\\b"
+                },
+                {
+                    "name": "keyword.boolean.k",
+                    "match": "\\b(true|false)\\b"
+                }
+            ]
+        },
+
+        "syntax": {
+            
+        },
+
+        "module":{
+            "begin": "(module)\\s*([\\w\\d\\-\\_]+)",
+            "beginCaptures": {
+                "1": { "name": "keyword.module.k" },
+                "2": { "name": "entity.name.namespace.k" }
+            },
+            "end": "(endmodule)",
+            "endCaptures": {
+                "1": { "name": "keyword.module.k" }
+            },
+            "patterns": [
+                {
+                    "include": "#tag"
+                },
+                { 
+                    "include": "#string"
+                },
+                {
+                    "include": "#keyword"
+                },
+                {
+                    "include": "#constant"
+                }
+            ]
+        }
+    },
+    "scopeName": "source.k"
+}
