@@ -22,7 +22,7 @@ module TEST
 
     syntax Src ::= List{Stmt, ""}
 
-    configuration <T>
+    configuration <T color="123">
         <k> $PGM:Src </k>
         <vars> .Map </vars>
         <map> .Map </map>
@@ -46,6 +46,5 @@ module TEST
     rule <k> lookup X:Id ; => I in_keys(M) ...</k>
         <vars>... X |-> I ...</vars>
         <map> M:Map </map>
-
 
 endmodule

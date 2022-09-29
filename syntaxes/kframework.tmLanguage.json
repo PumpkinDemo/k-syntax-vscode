@@ -4,18 +4,35 @@
     "patterns": [
         { "include": "#module" },
         { "include": "#requireSource" },
-        { "include": "#string" }
+        { "include": "#string" },
+        { "include": "#comment" }
     ],
     "repository": {
+        "comment": {
+            "patterns": [
+                {
+                    "name": "comment.block.k",
+                    "begin": "/\\*",
+                    "end": "\\*/"
+                },
+                {
+                    "name": "comment.line.k",
+                    "begin": "//",
+                    "end": "$\\n?"
+                }
+            ]
+        },
+
         "requireSource": {
             "name": "keyword.control.requires.k",
             "match": "\\b(requires)\\b"
         },
+
         "keyword": {
             "patterns": [
                 {
                     "name": "keyword.control.k",
-                    "match": "\\b(requires|imports)\\b"
+                    "match": "\\b(requires)\\b"
                 },
                 {
                     "name": "keyword.stmt.k",
@@ -27,7 +44,7 @@
                 },
                 {
                     "name": "string.regexp.k",
-                    "match": "\\b(anywhere|function|strict|avoid|prefer|bracket|non-assoc|seqstrict|left|right|macro|token|notInRules|autoReject|structural|latex|binder)\\b"
+                    "match": "\\b(owise|anywhere|function|strict|avoid|prefer|bracket|non-assoc|seqstrict|left|right|macro|token|notInRules|autoReject|structural|latex|binder)\\b"
                 },
                 {
                     "name": "support.type.property-name.k",
@@ -48,21 +65,34 @@
             ]
         },
 
-        "tag":{
-            "begin": "(<)\\s*([\\w\\d\\-\\_]+)\\s*(>)",
+        "cell-attr": {
+            "match": "([\\w\\d\\-]+)=(\\\".*\\\")",
+            "captures": {
+                "1": { "name": "entity.other.attribute-name.tag.k" },
+                "2": { "name": "string.quoted.double.k" }
+            }
+        },
+
+        "cell":{
+            "begin": "(<)\\s*([\\w\\d\\-\\_]+)(\\s*[\\w\\d\\-]+=\\\".*\\\")*\\s*(>)",
             "beginCaptures": {
                 "1": { "name": "punctuation.definition.tag.k" },
                 "2": { "name": "entity.name.tag.k" },
-                "3": { "name": "punctuation.definition.tag.k" }
+                "3": {
+                    "patterns": [
+                        { "include": "#cell-attr" }
+                    ]
+                },
+                "4": { "name": "punctuation.definition.tag.k" }
             },
-            "end": "(<)\\/\\s*(\\2)\\s*(>)",
+            "end": "(<\\/)\\s*(\\2)\\s*(>)",
             "endCaptures": {
                 "1": { "name": "punctuation.definition.tag.k" },
                 "2": { "name": "entity.name.tag.k" },
                 "3": { "name": "punctuation.definition.tag.k" }
             },
             "patterns": [
-                { "include": "#tag" },
+                { "include": "#cell" },
                 { "include": "#constant" }
             ]
         },
@@ -84,6 +114,14 @@
             
         },
 
+        "imports-stmt": {
+            "match": "(imports)\\s*([\\w\\d\\-_]*)$",
+            "captures": {
+                "1": { "name": "keyword.control.imports.k"},
+                "2": { "name": "entity.name.namespace.imports.k" }
+            }
+        },
+
         "module":{
             "begin": "(module)\\s*([\\w\\d\\-\\_]+)",
             "beginCaptures": {
@@ -95,18 +133,12 @@
                 "1": { "name": "keyword.module.k" }
             },
             "patterns": [
-                {
-                    "include": "#tag"
-                },
-                { 
-                    "include": "#string"
-                },
-                {
-                    "include": "#keyword"
-                },
-                {
-                    "include": "#constant"
-                }
+                { "include": "#cell" },
+                { "include": "#string" },
+                { "include": "#keyword" },
+                { "include": "#constant" },
+                { "include": "#comment" },
+                { "include": "#imports-stmt" }
             ]
         }
     },
