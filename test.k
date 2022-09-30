@@ -22,8 +22,8 @@ module TEST
 
     syntax Src ::= List{Stmt, ""}
 
-    configuration <T color="123">
-        <k> $PGM:Src </k>
+    configuration <T color="123" foo="123" bar="123">
+        <k color="red"> $PGM:Src </k>
         <vars> .Map </vars>
         <map> .Map </map>
     </T>

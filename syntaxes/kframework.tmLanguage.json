@@ -44,7 +44,7 @@
                 },
                 {
                     "name": "string.regexp.k",
-                    "match": "\\b(owise|anywhere|function|strict|avoid|prefer|bracket|non-assoc|seqstrict|left|right|macro|token|notInRules|autoReject|structural|latex|binder)\\b"
+                    "match": "\\b(owise|anywhere|function|functional|strict|avoid|prefer|bracket|non-assoc|seqstrict|left|right|macro|token|notInRules|autoReject|structural|latex|binder)\\b"
                 },
                 {
                     "name": "support.type.property-name.k",
@@ -66,7 +66,7 @@
         },
 
         "cell-attr": {
-            "match": "([\\w\\d\\-]+)=(\\\".*\\\")",
+            "match": "([\\w\\d\\-]+)=(\\\"[^\\\"]*\\\")",
             "captures": {
                 "1": { "name": "entity.other.attribute-name.tag.k" },
                 "2": { "name": "string.quoted.double.k" }
