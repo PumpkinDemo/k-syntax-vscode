@@ -2,7 +2,7 @@
 
 Kframework syntax highlight for vscode.
 
-The official extension seems too poor...
+The official extension seems a little poor...
 
 In building...
 
@@ -11,3 +11,5 @@ In building...
 ```bash
 vsce package
 ```
+
+vscode -> extensions -> install from VSIX

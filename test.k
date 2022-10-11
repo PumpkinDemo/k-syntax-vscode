@@ -33,10 +33,14 @@ module TEST
     
     rule <k> var X:Id ; => #nondetInt ~> var X ; ...</k>
     rule <k> I:Int ~> var X:Id ; => . ...</k>
-        <vars> M => M [ X <- I ] </vars>
+        <vars> M:Map => M [ X <- I ] </vars>
 
     syntax KItem ::= "freezer_map_touch" "(" ")"
-    rule <k> map [ X:Id ] ; => X ~> freezer_map_touch() ...</k>
+    rule <k> map [ X:Id ] ; 
+            >>> X ~> freezer_map_touch()
+            #token("123", "Id")
+            #if  #then
+        ...</k>
         requires true
     
     rule <k> X:Id ~> freezer_map_touch() => . ...</k>
